@@ -52,6 +52,8 @@ private:
 
 	std::vector<sf::RectangleShape> enemies;
 	sf::RectangleShape enemy;
+	std::vector<sf::CircleShape> bonuses;
+	sf::CircleShape bonus;
 
 	//private funckions
 
@@ -60,6 +62,7 @@ private:
 	void initFonsts();
 	void initText();
 	void initEnemies();
+	void initBonuses();
 	void initTime();
 
 public:
@@ -74,6 +77,7 @@ public:
 
 	//functions
 	void spawnEnemy();
+	void spawnBonus();
 
 
 	void poolEvents();
@@ -81,11 +85,13 @@ public:
 	void uptadeText();
 	void uptadeTime();
 	void updateEnemies();
+	void updateBonuses();
 	void uptade();
 
 
 	void renderText(sf::RenderTarget& target);
 	void renderEnemies(sf::RenderTarget&target);
+	void renderBonuses(sf::CircleShape& target);
 	void render();
 };
 

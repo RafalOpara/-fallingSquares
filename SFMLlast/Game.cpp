@@ -11,7 +11,7 @@ void Game::initializeVariables()
 	this->health = 10;
 	this->enemySpawnTimerMax = 10.f;
 	this->enemySpawnTimer = this->enemySpawnTimerMax;
-	this->maxEnemies = 1;
+	this->maxEnemies =3;
 	this->mouseHeld = false;
 	this->startTime = clock();
 	this->temp = 50;
@@ -54,12 +54,25 @@ void Game::initText()
 void Game::initEnemies()
 {
 	this->enemy.setPosition(10.f, 10.f);
-	this->enemy.setSize(sf::Vector2f(100.f, 100.f));
-	this->enemy.setFillColor(sf::Color::Cyan);
-	//this->enemy.setOutlineColor(sf::Color::Green);
-	//this->enemy.setOutlineThickness(1.f);
 
+}
+void Game::initBonuses()
+{
+	int randomX;
+	int randomY = std::rand() % 600;
+	int sideX = std::rand() % 2;
+	if (sideX == 0)
+	{
+		randomX = 0;
+	}
+	else
+	{
+		randomX = 800;
+	}
 
+	this->bonus.setPosition(randomX, randomY);
+	this->bonus.setRadius(50);
+	this->bonus.setFillColor(sf::Color::White);
 }
 
 
@@ -72,6 +85,7 @@ Game::Game()
 	this->initFonsts();
 	this->initText();
 	this->initEnemies();
+	this->initBonuses();
 }
 
 Game::~Game()
@@ -94,6 +108,7 @@ const bool Game::getEndGame() const
 }
 
 //functions
+
 
 void Game::spawnEnemy()
 {
@@ -330,11 +345,14 @@ void Game::updateEnemies()
 					deleted = true;
 					this->enemies.erase(this->enemies.begin() + i);
 				}
-				else
-				{
-					this->health--;
-				}
+				
 			}
+
+			if (!deleted)
+			{
+				this->health--;
+			}
+			
 		}
 		
 	}
